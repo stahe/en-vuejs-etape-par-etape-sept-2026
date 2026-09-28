@@ -1,0 +1,1598 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Step-by-Step Introduction to the [Vue.js] Web Framework">
+      
+      
+        <meta name="author" content="Serge Tahé">
+      
+      
+        <link rel="canonical" href="https://stahe.github.io/en-vuejs-etape-par-etape-sept-2026/routing.html">
+      
+      
+        <link rel="prev" href="the-components.html">
+      
+      
+        <link rel="next" href="shared-state.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>4. Routing - Step-by-Step Introduction to the [Vue.js] Web Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/focus.css">
+    
+      <link rel="stylesheet" href="stylesheets/bidi.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EBZC3JVJNR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    var siteName = "Step-by-Step Introduction to the [Vue.js] Web Framework";
+    gtag('config', 'G-EBZC3JVJNR', {
+        'page_title': siteName
+    });
+  </script>
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4-routing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Step-by-Step Introduction to the [Vue.js] Web Framework" class="md-header__button md-logo" aria-label="Step-by-Step Introduction to the [Vue.js] Web Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Step-by-Step Introduction to the [Vue.js] Web Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4. Routing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://stahe.github.io/en-vuejs-etape-par-etape-sept-2026" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Step-by-Step Introduction to the [Vue.js] Web Framework" class="md-nav__button md-logo" aria-label="Step-by-Step Introduction to the [Vue.js] Web Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Step-by-Step Introduction to the [Vue.js] Web Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://stahe.github.io/en-vuejs-etape-par-etape-sept-2026" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting-started-with-vuejs.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Getting Started with Vue.js
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="the-components.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. The Components
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Routing
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="routing.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Routing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#41-example-13-the-router" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Example 13: The Router
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-example-14-navigation-restrictions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Example 14: Navigation Restrictions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="shared-state.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Shared State
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="internationalization.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Internationalization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="the-rdvmedecins-server-a-black-box.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. The RdvMedecins server, a black box
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="communicating-with-the-server.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Communicating with the server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="interim-conclusion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Interim Conclusion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="case-study-the-vuejs-client-for-the-rdvmedecins-application.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Case Study: The Vue.js client for the RdvMedecins application
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="deployment.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="conclusion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Conclusion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="appendices.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Appendices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="4-routing">4. <span style="color: #2e74b5">Routing</span></h1>
+<p>A <em>[Vue.js]</em> application loads only one page, HTML. However, the <em>[RdvMedecins]</em> application has a login page, a calendar page, a “My Account” page... Each has its own URL (<strong><em>[/login]</em></strong>, <strong><em>[/agenda]</em></strong>, <strong><em>[/mon-espace]</em></strong>), which can be bookmarked, and the browser’s Back and Forward buttons work. This is the work of <strong>the router</strong>, the <em>[vue-router]</em> library.</p>
+<h2 id="41-example-13-the-router">4.1. <span style="color: #2e74b5">Example 13: The Router</span></h2>
+<p>The router is added to the application in <strong><em>[main.ts]</em></strong>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="o">//</span> <span class="o">=========================================================================</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="o">//</span> <span class="mi">13</span><span class="o">-</span><span class="n">router</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">main</span><span class="o">.</span><span class="n">ts</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="o">//</span> <span class="o">-------------------------------------------------------------------------</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="o">//</span> <span class="n">app</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">router</span><span class="p">):</span> <span class="n">the</span> <span class="n">router</span> <span class="ow">is</span> <span class="n">added</span> <span class="n">to</span> <span class="n">the</span> <span class="n">application</span><span class="o">.</span> <span class="n">The</span> <span class="n">components</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="o">//</span> <span class="o">&lt;</span><span class="n">RouterLink</span><span class="o">&gt;</span> <span class="ow">and</span> <span class="o">&lt;</span><span class="n">RouterView</span><span class="o">&gt;</span> <span class="n">can</span> <span class="n">then</span> <span class="n">be</span> <span class="n">used</span> <span class="n">anywhere</span><span class="o">.</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="o">//</span> <span class="o">=========================================================================</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="kn">import</span><span class="w"> </span><span class="p">{</span> <span class="n">createApp</span> <span class="p">}</span> <span class="kn">from</span><span class="w"> </span><span class="s1">'vue'</span><span class="p">;</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="kn">import</span><span class="w"> </span><span class="s1">'bootstrap/dist/css/bootstrap.min.css'</span><span class="p">;</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="kn">import</span><span class="w"> </span><span class="nn">App</span> <span class="kn">from</span><span class="w"> </span><span class="s1">'./App.vue'</span><span class="p">;</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="kn">import</span><span class="w"> </span><span class="p">{</span> <span class="n">router</span> <span class="p">}</span> <span class="kn">from</span><span class="w"> </span><span class="s1">'./router'</span><span class="p">;</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="n">createApp</span><span class="p">(</span><span class="n">App</span><span class="p">)</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">router</span><span class="p">)</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">'#app'</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Line 13: <strong><em>[app.use(...)]</em></strong> installs an <strong>extension</strong> (<em>[plugin]</em>): The components <strong><em>[&lt;RouterLink&gt;]</em></strong> and <strong><em>[&lt;RouterView&gt;]</em></strong>, and the functions <strong><em>[useRoute()]</em></strong> and <strong><em>[useRouter()]</em></strong>, become available everywhere.</li>
+</ul>
+<p>The example data, &quot;hard-coded&quot;:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1">// "hard-coded" data, so as not to depend on a server in this example</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">Medecin</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">  </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">  </span><span class="nx">titre</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">  </span><span class="nx">prenom</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">  </span><span class="nx">nom</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">  </span><span class="nx">specialite</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="p">}</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">MEDECINS</span><span class="o">:</span><span class="w"> </span><span class="kt">Medecin</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">1</span><span class="p">,</span><span class="w"> </span><span class="nx">titre</span><span class="o">:</span><span class="w"> </span><span class="s1">'Mme'</span><span class="p">,</span><span class="w"> </span><span class="nx">prenom</span><span class="o">:</span><span class="w"> </span><span class="s1">'Marie'</span><span class="p">,</span><span class="w"> </span><span class="nx">nom</span><span class="o">:</span><span class="w"> </span><span class="s1">'PELISSIER'</span><span class="p">,</span><span class="w"> </span><span class="nx">specialite</span><span class="o">:</span><span class="w"> </span><span class="s1">'généraliste'</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">2</span><span class="p">,</span><span class="w"> </span><span class="nx">titre</span><span class="o">:</span><span class="w"> </span><span class="s1">'Mr'</span><span class="p">,</span><span class="w"> </span><span class="nx">prenom</span><span class="o">:</span><span class="w"> </span><span class="s1">'Paul'</span><span class="p">,</span><span class="w"> </span><span class="nx">nom</span><span class="o">:</span><span class="w"> </span><span class="s1">'TATOU'</span><span class="p">,</span><span class="w"> </span><span class="nx">specialite</span><span class="o">:</span><span class="w"> </span><span class="s1">'pédiatre'</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">3</span><span class="p">,</span><span class="w"> </span><span class="nx">titre</span><span class="o">:</span><span class="w"> </span><span class="s1">'Melle'</span><span class="p">,</span><span class="w"> </span><span class="nx">prenom</span><span class="o">:</span><span class="w"> </span><span class="s1">'Sophie'</span><span class="p">,</span><span class="w"> </span><span class="nx">nom</span><span class="o">:</span><span class="w"> </span><span class="s1">'DUPONT'</span><span class="p">,</span><span class="w"> </span><span class="nx">specialite</span><span class="o">:</span><span class="w"> </span><span class="s1">'généraliste'</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="p">];</span>
+</code></pre></div></td></tr></table></div>
+<p>The routes:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span>
+<span class="normal"><a href="#__codelineno-2-20">20</a></span>
+<span class="normal"><a href="#__codelineno-2-21">21</a></span>
+<span class="normal"><a href="#__codelineno-2-22">22</a></span>
+<span class="normal"><a href="#__codelineno-2-23">23</a></span>
+<span class="normal"><a href="#__codelineno-2-24">24</a></span>
+<span class="normal"><a href="#__codelineno-2-25">25</a></span>
+<span class="normal"><a href="#__codelineno-2-26">26</a></span>
+<span class="normal"><a href="#__codelineno-2-27">27</a></span>
+<span class="normal"><a href="#__codelineno-2-28">28</a></span>
+<span class="normal"><a href="#__codelineno-2-29">29</a></span>
+<span class="normal"><a href="#__codelineno-2-30">30</a></span>
+<span class="normal"><a href="#__codelineno-2-31">31</a></span>
+<span class="normal"><a href="#__codelineno-2-32">32</a></span>
+<span class="normal"><a href="#__codelineno-2-33">33</a></span>
+<span class="normal"><a href="#__codelineno-2-34">34</a></span>
+<span class="normal"><a href="#__codelineno-2-35">35</a></span>
+<span class="normal"><a href="#__codelineno-2-36">36</a></span>
+<span class="normal"><a href="#__codelineno-2-37">37</a></span>
+<span class="normal"><a href="#__codelineno-2-38">38</a></span>
+<span class="normal"><a href="#__codelineno-2-39">39</a></span>
+<span class="normal"><a href="#__codelineno-2-40">40</a></span>
+<span class="normal"><a href="#__codelineno-2-41">41</a></span>
+<span class="normal"><a href="#__codelineno-2-42">42</a></span>
+<span class="normal"><a href="#__codelineno-2-43">43</a></span>
+<span class="normal"><a href="#__codelineno-2-44">44</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="o">//</span> <span class="o">=========================================================================</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="o">//</span> <span class="mi">13</span><span class="o">-</span><span class="n">router</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">router</span><span class="o">.</span><span class="n">ts</span> <span class="o">-</span> <span class="n">the</span> <span class="n">application</span><span class="err">’</span><span class="n">s</span> <span class="n">ROUTES</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="o">//</span> <span class="o">-------------------------------------------------------------------------</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="o">//</span> <span class="n">A</span> <span class="n">Vue</span><span class="o">.</span><span class="n">js</span> <span class="n">application</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">single</span><span class="o">-</span><span class="n">page</span> <span class="n">application</span> <span class="p">(</span><span class="n">SPA</span><span class="p">:</span> <span class="n">Single</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="o">//</span> <span class="n">Page</span> <span class="n">Application</span><span class="p">):</span> <span class="n">the</span> <span class="n">browser</span> <span class="n">loads</span> <span class="n">only</span> <span class="n">the</span> <span class="n">UNE</span> <span class="n">page</span> <span class="n">HTML</span><span class="o">.</span> <span class="n">When</span> <span class="n">you</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="o">//</span> <span class="n">clicks</span> <span class="n">on</span> <span class="n">an</span> <span class="n">internal</span> <span class="n">link</span><span class="p">;</span> <span class="n">no</span> <span class="n">request</span> <span class="ow">is</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">the</span> <span class="n">server</span><span class="p">:</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="o">//</span> <span class="n">the</span> <span class="n">router</span> <span class="n">changes</span> <span class="n">the</span> <span class="n">address</span> <span class="n">displayed</span> <span class="n">by</span> <span class="n">the</span> <span class="n">browser</span> <span class="ow">and</span> <span class="n">replaces</span> <span class="n">the</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="o">//</span> <span class="n">component</span> <span class="n">displayed</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">RouterView</span><span class="o">&gt;.</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="o">//</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="o">//</span> <span class="n">A</span> <span class="n">route</span> <span class="n">associates</span> <span class="n">a</span> <span class="n">CHEMIN</span> <span class="k">with</span> <span class="n">a</span> <span class="n">COMPOSANT</span> <span class="p">(</span><span class="n">referred</span> <span class="n">to</span> <span class="k">as</span> <span class="n">a</span> <span class="err">“</span><span class="n">view</span><span class="p">,</span><span class="err">”</span> <span class="ow">in</span> <span class="n">the</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="o">//</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">context</span> <span class="n">of</span> <span class="n">an</span> <span class="n">application</span> <span class="n">screen</span><span class="p">):</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="o">//</span>    <span class="s1">'/doctors/:id'</span>       <span class="p">:</span><span class="nb">id</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">parameter</span> <span class="p">(</span><span class="o">/</span><span class="n">doctors</span><span class="o">/</span><span class="mi">2</span> <span class="o">-&gt;</span> <span class="nb">id</span> <span class="o">=</span> <span class="s2">"2"</span><span class="p">);</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="o">//</span>    <span class="s1">'/:pathMatch(.*)*   '</span> <span class="nb">any</span> <span class="n">path</span><span class="p">:</span> <span class="n">the</span> <span class="s2">"page not found"</span> <span class="n">page</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="o">//</span>                          <span class="p">(</span><span class="n">the</span> <span class="n">most</span> <span class="n">specific</span> <span class="n">path</span> <span class="n">always</span> <span class="n">takes</span> <span class="n">precedence</span><span class="p">)</span><span class="o">.</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="o">//</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="o">//</span> <span class="n">createWebHashHistory</span><span class="p">:</span> <span class="n">URLs</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">form</span> <span class="o">/</span><span class="mi">13</span><span class="o">-</span><span class="n">router</span><span class="o">/</span><span class="c1">#/doctors/2.</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="o">//</span> <span class="n">Everything</span> <span class="n">after</span> <span class="n">the</span> <span class="c1"># remains in the browser: reload the page (F5)</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="o">//</span> <span class="n">always</span> <span class="n">requests</span> <span class="o">/</span><span class="mi">13</span><span class="o">-</span><span class="n">router</span><span class="o">/</span> <span class="n">again</span><span class="p">,</span> <span class="n">which</span> <span class="n">exists</span><span class="o">.</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">simplest</span> <span class="n">method</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="o">//</span> <span class="n">when</span> <span class="n">the</span> <span class="n">server</span> <span class="n">knows</span> <span class="n">nothing</span> <span class="n">about</span> <span class="n">the</span> <span class="n">router</span><span class="err">—</span><span class="ow">in</span> <span class="n">this</span> <span class="n">case</span><span class="p">,</span> <span class="n">the</span> <span class="n">Vite</span> <span class="n">server</span><span class="p">,</span> <span class="n">which</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="o">//</span> <span class="n">serves</span> <span class="n">twenty</span> <span class="n">examples</span> <span class="n">at</span> <span class="n">a</span> <span class="n">time</span><span class="o">.</span> <span class="n">The</span> <span class="n">case</span> <span class="n">study</span> <span class="n">will</span> <span class="n">use</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21"></a><span class="o">//</span> <span class="s2">"clean"</span> <span class="n">addresses</span> <span class="p">(</span><span class="n">createWebHistory</span><span class="p">:</span> <span class="o">/</span><span class="n">agenda</span><span class="p">,</span> <span class="o">/</span><span class="n">doctors</span><span class="o">...</span><span class="p">)</span><span class="o">.</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22"></a><span class="o">//</span> <span class="o">=========================================================================</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23"></a>
+<a id="__codelineno-2-24" name="__codelineno-2-24"></a><span class="kn">import</span><span class="w"> </span><span class="p">{</span> <span class="n">createRouter</span><span class="p">,</span> <span class="n">createWebHashHistory</span> <span class="p">}</span> <span class="kn">from</span><span class="w"> </span><span class="s1">'vue-router'</span><span class="p">;</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25"></a><span class="kn">import</span><span class="w"> </span><span class="nn">Accueil</span> <span class="kn">from</span><span class="w"> </span><span class="s1">'./views/Accueil.vue'</span><span class="p">;</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26"></a><span class="kn">import</span><span class="w"> </span><span class="nn">ListeMedecins</span> <span class="kn">from</span><span class="w"> </span><span class="s1">'./views/ListeMedecins.vue'</span><span class="p">;</span>
+<a id="__codelineno-2-27" name="__codelineno-2-27"></a><span class="kn">import</span><span class="w"> </span><span class="nn">DetailMedecin</span> <span class="kn">from</span><span class="w"> </span><span class="s1">'./views/DetailMedecin.vue'</span><span class="p">;</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28"></a><span class="kn">import</span><span class="w"> </span><span class="nn">Recherche</span> <span class="kn">from</span><span class="w"> </span><span class="s1">'./views/Recherche.vue'</span><span class="p">;</span>
+<a id="__codelineno-2-29" name="__codelineno-2-29"></a><span class="kn">import</span><span class="w"> </span><span class="nn">PageIntrouvable</span> <span class="kn">from</span><span class="w"> </span><span class="s1">'./views/PageIntrouvable.vue'</span><span class="p">;</span>
+<a id="__codelineno-2-30" name="__codelineno-2-30"></a>
+<a id="__codelineno-2-31" name="__codelineno-2-31"></a><span class="n">export</span> <span class="n">const</span> <span class="n">router</span> <span class="o">=</span> <span class="n">createRouter</span><span class="p">({</span>
+<a id="__codelineno-2-32" name="__codelineno-2-32"></a>  <span class="n">history</span><span class="p">:</span> <span class="n">createWebHashHistory</span><span class="p">(),</span>
+<a id="__codelineno-2-33" name="__codelineno-2-33"></a>  <span class="n">routes</span><span class="p">:</span> <span class="p">[</span>
+<a id="__codelineno-2-34" name="__codelineno-2-34"></a>    <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">'/'</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'accueil'</span><span class="p">,</span> <span class="n">component</span><span class="p">:</span> <span class="n">Accueil</span> <span class="p">},</span>
+<a id="__codelineno-2-35" name="__codelineno-2-35"></a>    <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">'/medecins'</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'medecins'</span><span class="p">,</span> <span class="n">component</span><span class="p">:</span> <span class="n">ListeMedecins</span> <span class="p">},</span>
+<a id="__codelineno-2-36" name="__codelineno-2-36"></a>     <span class="o">//</span> <span class="n">props</span><span class="p">:</span> <span class="n">true</span> <span class="o">-&gt;</span> <span class="n">the</span> <span class="p">:</span><span class="nb">id</span> <span class="n">parameter</span> <span class="ow">is</span> <span class="n">passed</span> <span class="n">to</span> <span class="n">the</span> <span class="n">component</span> <span class="k">as</span> <span class="n">a</span> <span class="n">PROP</span>
+<a id="__codelineno-2-37" name="__codelineno-2-37"></a>     <span class="o">//</span> <span class="p">(</span><span class="n">the</span> <span class="n">component</span> <span class="ow">is</span> <span class="n">no</span> <span class="n">longer</span> <span class="n">dependent</span> <span class="n">on</span> <span class="n">the</span> <span class="n">router</span><span class="p">:</span> <span class="n">easier</span> <span class="n">to</span> <span class="n">reuse</span><span class="p">)</span>
+<a id="__codelineno-2-38" name="__codelineno-2-38"></a>    <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">'/medecins/:id'</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'medecin'</span><span class="p">,</span> <span class="n">component</span><span class="p">:</span> <span class="n">DetailMedecin</span><span class="p">,</span> <span class="n">props</span><span class="p">:</span> <span class="n">true</span> <span class="p">},</span>
+<a id="__codelineno-2-39" name="__codelineno-2-39"></a>    <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">'/recherche'</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'recherche'</span><span class="p">,</span> <span class="n">component</span><span class="p">:</span> <span class="n">Recherche</span> <span class="p">},</span>
+<a id="__codelineno-2-40" name="__codelineno-2-40"></a>     <span class="o">//</span> <span class="n">a</span> <span class="n">redirect</span><span class="p">:</span> <span class="n">the</span> <span class="n">old</span> <span class="n">address</span> <span class="n">leads</span> <span class="n">to</span> <span class="n">the</span> <span class="n">new</span> <span class="n">one</span>
+<a id="__codelineno-2-41" name="__codelineno-2-41"></a>    <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">'/docteurs'</span><span class="p">,</span> <span class="n">redirect</span><span class="p">:</span> <span class="s1">'/medecins'</span> <span class="p">},</span>
+<a id="__codelineno-2-42" name="__codelineno-2-42"></a>    <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">'/:pathMatch(.*)*'</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'introuvable'</span><span class="p">,</span> <span class="n">component</span><span class="p">:</span> <span class="n">PageIntrouvable</span> <span class="p">},</span>
+<a id="__codelineno-2-43" name="__codelineno-2-43"></a>  <span class="p">],</span>
+<a id="__codelineno-2-44" name="__codelineno-2-44"></a><span class="p">});</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Lines 33–43: A <strong>route</strong> associates a path with a component, which is called a “view” (in the sense of an application screen; this has nothing to do with the <em>[Handlebars]</em> views from the <em>[NestJS]</em> course, except for their role);</li>
+<li>line 34: a route can have a name, which is more stable than its path for creating links;</li>
+<li>Line 38: <strong><em>[:id]</em></strong> is a <strong>parameter</strong>: <strong><em>[/medecins/2]</em></strong> displays <strong><em>[DetailMedecin]</em></strong> along with <strong><em>[id = &quot;2&quot;]</em></strong>. The option <strong><em>[props: true]</em></strong> passes it to the component as a prop: the component is then no longer dependent on the router;</li>
+<li>line 41: a redirect: the address <strong><em>[/docteurs]</em></strong> leads to <strong><em>[/medecins]</em></strong>;</li>
+<li>line 42: an arbitrary path: the “page not found” page. It only receives addresses that no other route recognizes: <em>[vue-router]</em> sorts routes by the precision of their path; the most precise one takes precedence (it is still placed last for readability);</li>
+<li>line 32: history mode. With <strong><em>[createWebHashHistory]</em></strong>, the addresses take the form <strong><em>[/13-routeur/#/medecins/2]</em></strong>: anything following <strong><em>[#]</em></strong> is never sent to the server, and reloading the page (F5) always requests <strong><em>[/13-routeur/]</em></strong>, which exists. This is the simplest approach when the server does not know the client’s routes, which is the case for the server at <em>[Vite]</em>, which serves twenty examples at a time. The case study will use <strong><em>[createWebHistory]</em></strong> and “clean” addresses (<strong><em>[/agenda]</em></strong>), which requires a little extra effort on the server’s part.</li>
+</ul>
+<p>The application’s “shell”:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span>
+<span class="normal"><a href="#__codelineno-3-15">15</a></span>
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span>
+<span class="normal"><a href="#__codelineno-3-18">18</a></span>
+<span class="normal"><a href="#__codelineno-3-19">19</a></span>
+<span class="normal"><a href="#__codelineno-3-20">20</a></span>
+<span class="normal"><a href="#__codelineno-3-21">21</a></span>
+<span class="normal"><a href="#__codelineno-3-22">22</a></span>
+<span class="normal"><a href="#__codelineno-3-23">23</a></span>
+<span class="normal"><a href="#__codelineno-3-24">24</a></span>
+<span class="normal"><a href="#__codelineno-3-25">25</a></span>
+<span class="normal"><a href="#__codelineno-3-26">26</a></span>
+<span class="normal"><a href="#__codelineno-3-27">27</a></span>
+<span class="normal"><a href="#__codelineno-3-28">28</a></span>
+<span class="normal"><a href="#__codelineno-3-29">29</a></span>
+<span class="normal"><a href="#__codelineno-3-30">30</a></span>
+<span class="normal"><a href="#__codelineno-3-31">31</a></span>
+<span class="normal"><a href="#__codelineno-3-32">32</a></span>
+<span class="normal"><a href="#__codelineno-3-33">33</a></span>
+<span class="normal"><a href="#__codelineno-3-34">34</a></span>
+<span class="normal"><a href="#__codelineno-3-35">35</a></span>
+<span class="normal"><a href="#__codelineno-3-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="o">&lt;</span><span class="err">!</span><span class="o">--</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>  <span class="o">=========================================================================</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>  <span class="mi">13</span><span class="o">-</span><span class="n">routeur</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">App</span><span class="o">.</span><span class="n">vue</span> <span class="o">-</span> <span class="n">la</span> <span class="s2">"coquille"</span> <span class="n">de</span> <span class="n">l</span><span class="s1">'application</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>  <span class="o">-------------------------------------------------------------------------</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a>    <span class="o">-</span> <span class="o">&lt;</span><span class="n">RouterLink</span> <span class="n">to</span><span class="o">=</span><span class="s2">"..."</span><span class="o">&gt;</span> <span class="p">:</span> <span class="n">un</span> <span class="n">lien</span> <span class="n">interne</span><span class="o">.</span> <span class="n">Il</span> <span class="n">produit</span> <span class="n">une</span> <span class="n">balise</span> <span class="o">&lt;</span><span class="n">a</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>      <span class="n">mais</span> <span class="n">un</span> <span class="n">clic</span> <span class="n">ne</span> <span class="n">recharge</span> <span class="n">pas</span> <span class="n">la</span> <span class="n">page</span> <span class="p">:</span> <span class="n">c</span><span class="s1">'est le routeur qui agit.</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a>      <span class="n">Le</span> <span class="n">lien</span> <span class="n">de</span> <span class="n">la</span> <span class="n">page</span> <span class="n">affichée</span> <span class="n">reçoit</span> <span class="n">la</span> <span class="n">classe</span> <span class="s2">"router-link-active"</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a>      <span class="p">(</span><span class="n">ici</span> <span class="n">remplacée</span> <span class="n">par</span> <span class="s2">"active"</span><span class="p">,</span> <span class="n">celle</span> <span class="n">de</span> <span class="n">Bootstrap</span><span class="p">)</span> <span class="p">;</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a>    <span class="o">-</span> <span class="o">&lt;</span><span class="n">RouterView</span> <span class="o">/&gt;</span> <span class="p">:</span> <span class="n">l</span><span class="s1">'emplacement où s'</span><span class="n">affiche</span> <span class="n">le</span> <span class="n">composant</span> <span class="n">de</span> <span class="n">la</span> <span class="n">route</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a>      <span class="n">courante</span><span class="o">.</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a>  <span class="o">=========================================================================</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="o">--&gt;</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span> <span class="n">lang</span><span class="o">=</span><span class="s2">"ts"</span><span class="o">&gt;</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="kn">import</span><span class="w"> </span><span class="p">{</span> <span class="n">RouterLink</span><span class="p">,</span> <span class="n">RouterView</span><span class="p">,</span> <span class="n">useRoute</span> <span class="p">}</span> <span class="kn">from</span><span class="w"> </span><span class="s1">'vue-router'</span><span class="p">;</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="o">//</span> <span class="n">useRoute</span><span class="p">():</span> <span class="n">the</span> <span class="n">current</span> <span class="n">route</span> <span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">query</span><span class="o">...</span><span class="p">),</span> <span class="n">reactive</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="n">const</span> <span class="n">route</span> <span class="o">=</span> <span class="n">useRoute</span><span class="p">();</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19"></a>
+<a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21"></a>  <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">"container py-4"</span><span class="o">&gt;</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22"></a>    <span class="o">&lt;</span><span class="n">h1</span> <span class="n">class</span><span class="o">=</span><span class="s2">"h3 mb-3"</span><span class="o">&gt;</span><span class="n">Exemple</span> <span class="mi">13</span> <span class="o">-</span> <span class="n">le</span> <span class="n">routeur</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23"></a>    <span class="o">&lt;</span><span class="n">nav</span> <span class="n">class</span><span class="o">=</span><span class="s2">"nav nav-pills mb-3"</span><span class="o">&gt;</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24"></a>      <span class="o">&lt;</span><span class="n">RouterLink</span> <span class="n">class</span><span class="o">=</span><span class="s2">"nav-link"</span> <span class="n">active</span><span class="o">-</span><span class="n">class</span><span class="o">=</span><span class="s2">"active"</span> <span class="n">to</span><span class="o">=</span><span class="s2">"/"</span><span class="o">&gt;</span><span class="n">Accueil</span><span class="o">&lt;/</span><span class="n">RouterLink</span><span class="o">&gt;</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25"></a>       <span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="err">`</span><span class="n">to</span><span class="err">`</span> <span class="n">can</span> <span class="n">be</span> <span class="n">an</span> <span class="nb">object</span><span class="p">:</span> <span class="n">the</span> <span class="n">NOM</span> <span class="n">of</span> <span class="n">the</span> <span class="n">route</span> <span class="n">rather</span> <span class="n">than</span> <span class="n">its</span> <span class="n">path</span> <span class="o">--&gt;</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26"></a>      <span class="o">&lt;</span><span class="n">RouterLink</span> <span class="n">class</span><span class="o">=</span><span class="s2">"nav-link"</span> <span class="n">active</span><span class="o">-</span><span class="n">class</span><span class="o">=</span><span class="s2">"active"</span> <span class="p">:</span><span class="n">to</span><span class="o">=</span><span class="s2">"{ name: 'medecins' }"</span><span class="o">&gt;</span><span class="n">Médecins</span><span class="o">&lt;/</span><span class="n">RouterLink</span><span class="o">&gt;</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27"></a>      <span class="o">&lt;</span><span class="n">RouterLink</span> <span class="n">class</span><span class="o">=</span><span class="s2">"nav-link"</span> <span class="n">active</span><span class="o">-</span><span class="n">class</span><span class="o">=</span><span class="s2">"active"</span> <span class="p">:</span><span class="n">to</span><span class="o">=</span><span class="s2">"{ name: 'recherche', query: { q: 'généraliste' } }"</span><span class="o">&gt;</span><span class="n">Recherche</span><span class="o">&lt;/</span><span class="n">RouterLink</span><span class="o">&gt;</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28"></a>      <span class="o">&lt;</span><span class="n">RouterLink</span> <span class="n">class</span><span class="o">=</span><span class="s2">"nav-link"</span> <span class="n">to</span><span class="o">=</span><span class="s2">"/docteurs"</span><span class="o">&gt;/</span><span class="n">docteurs</span> <span class="p">(</span><span class="n">redirection</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">RouterLink</span><span class="o">&gt;</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29"></a>      <span class="o">&lt;</span><span class="n">RouterLink</span> <span class="n">class</span><span class="o">=</span><span class="s2">"nav-link"</span> <span class="n">to</span><span class="o">=</span><span class="s2">"/page-inconnue"</span><span class="o">&gt;</span><span class="n">Lien</span> <span class="n">cassé</span><span class="o">&lt;/</span><span class="n">RouterLink</span><span class="o">&gt;</span>
+<a id="__codelineno-3-30" name="__codelineno-3-30"></a>    <span class="o">&lt;/</span><span class="n">nav</span><span class="o">&gt;</span>
+<a id="__codelineno-3-31" name="__codelineno-3-31"></a>    <span class="o">&lt;</span><span class="n">p</span> <span class="n">class</span><span class="o">=</span><span class="s2">"small text-muted"</span><span class="o">&gt;</span><span class="n">route</span> <span class="n">courante</span> <span class="p">:</span> <span class="o">&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">route</span><span class="o">.</span><span class="n">fullPath</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">nom</span> <span class="p">:</span> <span class="p">{{</span> <span class="n">String</span><span class="p">(</span><span class="n">route</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="p">}})</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32"></a>    <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">"card p-3"</span><span class="o">&gt;</span>
+<a id="__codelineno-3-33" name="__codelineno-3-33"></a>      <span class="o">&lt;</span><span class="n">RouterView</span> <span class="o">/&gt;</span>
+<a id="__codelineno-3-34" name="__codelineno-3-34"></a>    <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<a id="__codelineno-3-35" name="__codelineno-3-35"></a>  <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<a id="__codelineno-3-36" name="__codelineno-3-36"></a><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>line 17: the current route (path, parameters, <strong><em>[query]</em></strong>...), which is dynamic: the template updates when it changes;</li>
+<li>line 24: <strong><em>[&lt;RouterLink&gt;]</em></strong> generates a <strong><em>[&lt;a&gt;]</em></strong> tag, but clicking does not reload the page: the router changes the address and the displayed component. The link on the current page is assigned the class specified by <strong><em>[active-class]</em></strong> (here, <strong><em>[active]</em></strong>, which is the class of <em>[Bootstrap]</em>);</li>
+<li>line 26: the destination can be an object: the route name rather than its path;</li>
+<li>line 27: a link with query parameters: <strong><em>[/recherche?q=généraliste]</em></strong>;</li>
+<li>line 33: the location where the current route component is displayed.</li>
+</ul>
+<p>The pages. The list of doctors generates links with parameters:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="mi">13</span><span class="o">-</span><span class="n">router</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">ListeMedecins</span><span class="o">.</span><span class="n">vue</span> <span class="o">-</span> <span class="n">links</span> <span class="k">with</span> <span class="n">parameters</span> <span class="o">--&gt;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span> <span class="n">lang</span><span class="o">=</span><span class="s2">"ts"</span><span class="o">&gt;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="kn">import</span><span class="w"> </span><span class="p">{</span> <span class="n">RouterLink</span> <span class="p">}</span> <span class="kn">from</span><span class="w"> </span><span class="s1">'vue-router'</span><span class="p">;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="kn">import</span><span class="w"> </span><span class="p">{</span> <span class="n">MEDECINS</span> <span class="p">}</span> <span class="kn">from</span><span class="w"> </span><span class="s1">'../donnees'</span><span class="p">;</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a>  <span class="o">&lt;</span><span class="n">ul</span> <span class="n">class</span><span class="o">=</span><span class="s2">"mb-0"</span><span class="o">&gt;</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a>    <span class="o">&lt;</span><span class="n">li</span> <span class="n">v</span><span class="o">-</span><span class="k">for</span><span class="o">=</span><span class="s2">"m in MEDECINS"</span> <span class="p">:</span><span class="n">key</span><span class="o">=</span><span class="s2">"m.id"</span><span class="o">&gt;</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a>       <span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="p">{</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span> <span class="p">}:</span> <span class="n">the</span> <span class="n">router</span> <span class="n">generates</span> <span class="n">the</span> <span class="n">address</span> <span class="o">/</span><span class="n">doctors</span><span class="o">/</span><span class="mi">2</span> <span class="n">itself</span> <span class="o">--&gt;</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a>      <span class="o">&lt;</span><span class="n">RouterLink</span> <span class="p">:</span><span class="n">to</span><span class="o">=</span><span class="s2">"{ name: 'medecin', params: { id: m.id } }"</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">m</span><span class="o">.</span><span class="n">titre</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">m</span><span class="o">.</span><span class="n">prenom</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">m</span><span class="o">.</span><span class="n">nom</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">RouterLink</span><span class="o">&gt;</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a>    <span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a>  <span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>line 11: the router itself constructs the address <strong><em>[/medecins/2]</em></strong> from the route name and its parameters.</li>
+</ul>
+<p>A doctor’s page:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span>
+<span class="normal"><a href="#__codelineno-5-17">17</a></span>
+<span class="normal"><a href="#__codelineno-5-18">18</a></span>
+<span class="normal"><a href="#__codelineno-5-19">19</a></span>
+<span class="normal"><a href="#__codelineno-5-20">20</a></span>
+<span class="normal"><a href="#__codelineno-5-21">21</a></span>
+<span class="normal"><a href="#__codelineno-5-22">22</a></span>
+<span class="normal"><a href="#__codelineno-5-23">23</a></span>
+<span class="normal"><a href="#__codelineno-5-24">24</a></span>
+<span class="normal"><a href="#__codelineno-5-25">25</a></span>
+<span class="normal"><a href="#__codelineno-5-26">26</a></span>
+<span class="normal"><a href="#__codelineno-5-27">27</a></span>
+<span class="normal"><a href="#__codelineno-5-28">28</a></span>
+<span class="normal"><a href="#__codelineno-5-29">29</a></span>
+<span class="normal"><a href="#__codelineno-5-30">30</a></span>
+<span class="normal"><a href="#__codelineno-5-31">31</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="o">&lt;</span><span class="err">!</span><span class="o">--</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a>  <span class="mi">13</span><span class="o">-</span><span class="n">routeur</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">DetailMedecin</span><span class="o">.</span><span class="n">vue</span> <span class="o">-</span> <span class="n">une</span> <span class="n">page</span> <span class="n">à</span> <span class="n">paramètre</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a>  <span class="n">L</span><span class="s1">'id arrive en PROP (props: true dans router.ts), sous forme de chaîne.</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a>  <span class="n">useRouter</span><span class="p">()</span> <span class="n">donne</span> <span class="n">le</span> <span class="n">routeur</span> <span class="n">lui</span><span class="o">-</span><span class="n">même</span><span class="p">,</span> <span class="n">pour</span> <span class="n">naviguer</span> <span class="n">PAR</span> <span class="n">LE</span> <span class="n">CODE</span><span class="o">.</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="o">--&gt;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span> <span class="n">lang</span><span class="o">=</span><span class="s2">"ts"</span><span class="o">&gt;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="kn">import</span><span class="w"> </span><span class="p">{</span> <span class="n">computed</span> <span class="p">}</span> <span class="kn">from</span><span class="w"> </span><span class="s1">'vue'</span><span class="p">;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="kn">import</span><span class="w"> </span><span class="p">{</span> <span class="n">useRouter</span> <span class="p">}</span> <span class="kn">from</span><span class="w"> </span><span class="s1">'vue-router'</span><span class="p">;</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="kn">import</span><span class="w"> </span><span class="p">{</span> <span class="n">MEDECINS</span> <span class="p">}</span> <span class="kn">from</span><span class="w"> </span><span class="s1">'../donnees'</span><span class="p">;</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="n">const</span> <span class="n">props</span> <span class="o">=</span> <span class="n">defineProps</span><span class="o">&lt;</span><span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="n">string</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">();</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="n">const</span> <span class="n">router</span> <span class="o">=</span> <span class="n">useRouter</span><span class="p">();</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="o">//</span> <span class="n">computed</span><span class="p">:</span> <span class="k">if</span> <span class="n">you</span> <span class="n">navigate</span> <span class="kn">from</span><span class="w"> </span><span class="o">/</span><span class="n">doctors</span><span class="o">/</span><span class="mi">1</span> <span class="n">to</span> <span class="o">/</span><span class="n">doctors</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">the</span> <span class="n">RÉUTILISE</span> <span class="n">view</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="o">//</span> <span class="n">same</span> <span class="n">component</span> <span class="ow">and</span> <span class="n">only</span> <span class="n">changes</span> <span class="n">the</span> <span class="n">prop</span><span class="err">—</span><span class="n">the</span> <span class="n">computed</span> <span class="n">follows</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="n">const</span> <span class="n">medecin</span> <span class="o">=</span> <span class="n">computed</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="n">MEDECINS</span><span class="o">.</span><span class="n">find</span><span class="p">((</span><span class="n">m</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">id</span> <span class="o">===</span> <span class="n">Number</span><span class="p">(</span><span class="n">props</span><span class="o">.</span><span class="n">id</span><span class="p">))</span> <span class="err">??</span> <span class="n">null</span><span class="p">);</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="n">const</span> <span class="n">suivant</span> <span class="o">=</span> <span class="n">computed</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="n">Number</span><span class="p">(</span><span class="n">props</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="o">%</span> <span class="n">MEDECINS</span><span class="o">.</span><span class="n">length</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19"></a>
+<a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21"></a>  <span class="o">&lt;</span><span class="n">div</span> <span class="n">v</span><span class="o">-</span><span class="k">if</span><span class="o">=</span><span class="s2">"medecin"</span><span class="o">&gt;</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22"></a>    <span class="o">&lt;</span><span class="n">h2</span> <span class="n">class</span><span class="o">=</span><span class="s2">"h5"</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">medecin</span><span class="o">.</span><span class="n">titre</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">medecin</span><span class="o">.</span><span class="n">prenom</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">medecin</span><span class="o">.</span><span class="n">nom</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">h2</span><span class="o">&gt;</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23"></a>    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">Spécialité</span> <span class="p">:</span> <span class="p">{{</span> <span class="n">medecin</span><span class="o">.</span><span class="n">specialite</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24"></a>    <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">"d-flex gap-2"</span><span class="o">&gt;</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25"></a>       <span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="n">navigation</span> <span class="n">via</span> <span class="n">code</span><span class="p">:</span> <span class="n">router</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="ow">or</span> <span class="n">router</span><span class="o">.</span><span class="n">back</span><span class="p">()</span> <span class="o">--&gt;</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26"></a>      <span class="o">&lt;</span><span class="n">button</span> <span class="n">class</span><span class="o">=</span><span class="s2">"btn btn-sm btn-outline-secondary"</span> <span class="nd">@click</span><span class="o">=</span><span class="s2">"router.back()"</span><span class="o">&gt;</span><span class="n">Retour</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27"></a>      <span class="o">&lt;</span><span class="n">button</span> <span class="n">class</span><span class="o">=</span><span class="s2">"btn btn-sm btn-outline-primary"</span> <span class="nd">@click</span><span class="o">=</span><span class="s2">"router.push({ name: 'medecin', params: { id: suivant } })"</span><span class="o">&gt;</span><span class="n">Médecin</span> <span class="n">suivant</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+<a id="__codelineno-5-28" name="__codelineno-5-28"></a>    <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<a id="__codelineno-5-29" name="__codelineno-5-29"></a>  <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<a id="__codelineno-5-30" name="__codelineno-5-30"></a>  <span class="o">&lt;</span><span class="n">p</span> <span class="n">v</span><span class="o">-</span><span class="k">else</span> <span class="n">class</span><span class="o">=</span><span class="s2">"text-danger mb-0"</span><span class="o">&gt;</span><span class="n">Le</span> <span class="n">médecin</span> <span class="n">n</span><span class="err">°</span> <span class="p">{{</span> <span class="nb">id</span> <span class="p">}}</span> <span class="n">n</span><span class="s1">'existe pas.&lt;/p&gt;</span>
+<a id="__codelineno-5-31" name="__codelineno-5-31"></a><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Line 11: The parameter <strong><em>[:id]</em></strong> is passed as a prop, in string form;</li>
+<li>line 12: the router itself, to navigate <strong>through the code</strong>;</li>
+<li>line 16: switching from <strong><em>[/medecins/1]</em></strong> to <strong><em>[/medecins/2]</em></strong> does not recreate the component: <em>[Vue.js]</em> reuses the one that is displayed and only changes its prop. A <strong><em>[computed]</em></strong> follows this change; code placed in <strong><em>[onMounted]</em></strong> would, however, be executed only once;</li>
+<li>lines 26 and 27: return to the previous page, go to another page.</li>
+</ul>
+<p><img src="images/10000000000003840000025879E84A4E.png" width="491" height="328" style="width:13cm;height:8.668cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000003840000025879E84A4E.png" /></p>
+<p>The search is a page entirely described by its URL, just like the GET form from the <em>[NestJS]</em> course:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span>
+<span class="normal"><a href="#__codelineno-6-15">15</a></span>
+<span class="normal"><a href="#__codelineno-6-16">16</a></span>
+<span class="normal"><a href="#__codelineno-6-17">17</a></span>
+<span class="normal"><a href="#__codelineno-6-18">18</a></span>
+<span class="normal"><a href="#__codelineno-6-19">19</a></span>
+<span class="normal"><a href="#__codelineno-6-20">20</a></span>
+<span class="normal"><a href="#__codelineno-6-21">21</a></span>
+<span class="normal"><a href="#__codelineno-6-22">22</a></span>
+<span class="normal"><a href="#__codelineno-6-23">23</a></span>
+<span class="normal"><a href="#__codelineno-6-24">24</a></span>
+<span class="normal"><a href="#__codelineno-6-25">25</a></span>
+<span class="normal"><a href="#__codelineno-6-26">26</a></span>
+<span class="normal"><a href="#__codelineno-6-27">27</a></span>
+<span class="normal"><a href="#__codelineno-6-28">28</a></span>
+<span class="normal"><a href="#__codelineno-6-29">29</a></span>
+<span class="normal"><a href="#__codelineno-6-30">30</a></span>
+<span class="normal"><a href="#__codelineno-6-31">31</a></span>
+<span class="normal"><a href="#__codelineno-6-32">32</a></span>
+<span class="normal"><a href="#__codelineno-6-33">33</a></span>
+<span class="normal"><a href="#__codelineno-6-34">34</a></span>
+<span class="normal"><a href="#__codelineno-6-35">35</a></span>
+<span class="normal"><a href="#__codelineno-6-36">36</a></span>
+<span class="normal"><a href="#__codelineno-6-37">37</a></span>
+<span class="normal"><a href="#__codelineno-6-38">38</a></span>
+<span class="normal"><a href="#__codelineno-6-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="cm">&lt;!--</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="cm">  13-routeur/src/views/Recherche.vue - une page pilotée par la QUERY de l'URL</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="cm">  (/recherche?q=pédiatre). Comme avec le formulaire GET du cours NestJS, la</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="cm">  page est entièrement décrite par son adresse : on peut la mettre en</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="cm">  favori, la recharger, revenir en arrière.</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="cm">--&gt;</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="p">&lt;</span><span class="nt">script</span> <span class="na">setup</span> <span class="na">lang</span><span class="o">=</span><span class="s">"ts"</span><span class="p">&gt;</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">computed</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">,</span><span class="w"> </span><span class="nx">watch</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'vue'</span><span class="p">;</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useRoute</span><span class="p">,</span><span class="w"> </span><span class="nx">useRouter</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'vue-router'</span><span class="p">;</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">MEDECINS</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'../donnees'</span><span class="p">;</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="kd">const</span><span class="w"> </span><span class="nx">route</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useRoute</span><span class="p">();</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useRouter</span><span class="p">();</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a>
+<a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="c1">// the input field starts with the value from URL...</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="kd">const</span><span class="w"> </span><span class="nx">saisie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ref</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">route</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">q</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s1">''</span><span class="p">));</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17"></a><span class="c1">// ... and follows the URL if it changes (e.g., by clicking the Back button)</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="nx">watch</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">route</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">q</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">q</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nx">saisie</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span><span class="p">(</span><span class="nx">q</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s1">''</span><span class="p">)));</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19"></a>
+<a id="__codelineno-6-20" name="__codelineno-6-20"></a><span class="kd">const</span><span class="w"> </span><span class="nx">resultats</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">computed</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span><span class="p">(</span><span class="nx">route</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">q</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s1">''</span><span class="p">).</span><span class="nx">toLowerCase</span><span class="p">();</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">MEDECINS</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">m</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">m</span><span class="p">.</span><span class="nx">prenom</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">m</span><span class="p">.</span><span class="nx">nom</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">m</span><span class="p">.</span><span class="nx">specialite</span><span class="si">}</span><span class="sb">`</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">().</span><span class="nx">includes</span><span class="p">(</span><span class="nx">q</span><span class="p">));</span>
+<a id="__codelineno-6-23" name="__codelineno-6-23"></a><span class="p">});</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24"></a>
+<a id="__codelineno-6-25" name="__codelineno-6-25"></a><span class="kd">function</span><span class="w"> </span><span class="nx">rechercher</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-26" name="__codelineno-6-26"></a><span class="w">   </span><span class="c1">// The URL is changed; the display updates to match the URL (computed above)</span>
+<a id="__codelineno-6-27" name="__codelineno-6-27"></a><span class="w">  </span><span class="nx">router</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">'recherche'</span><span class="p">,</span><span class="w"> </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">q</span><span class="o">:</span><span class="w"> </span><span class="nx">saisie</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">});</span>
+<a id="__codelineno-6-28" name="__codelineno-6-28"></a><span class="p">}</span>
+<a id="__codelineno-6-29" name="__codelineno-6-29"></a><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<a id="__codelineno-6-30" name="__codelineno-6-30"></a>
+<a id="__codelineno-6-31" name="__codelineno-6-31"></a><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+<a id="__codelineno-6-32" name="__codelineno-6-32"></a>  <span class="p">&lt;</span><span class="nt">form</span> <span class="na">class</span><span class="o">=</span><span class="s">"d-flex gap-2 mb-3"</span> <span class="err">@</span><span class="na">submit</span><span class="err">.</span><span class="na">prevent</span><span class="o">=</span><span class="s">"rechercher"</span><span class="p">&gt;</span>
+<a id="__codelineno-6-33" name="__codelineno-6-33"></a>    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">v-model</span><span class="o">=</span><span class="s">"saisie"</span> <span class="na">class</span><span class="o">=</span><span class="s">"form-control"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"nom ou spécialité"</span><span class="p">&gt;</span>
+<a id="__codelineno-6-34" name="__codelineno-6-34"></a>    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">"btn btn-primary"</span><span class="p">&gt;</span>Rechercher<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<a id="__codelineno-6-35" name="__codelineno-6-35"></a>  <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<a id="__codelineno-6-36" name="__codelineno-6-36"></a>  <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">"mb-0"</span><span class="p">&gt;</span>
+<a id="__codelineno-6-37" name="__codelineno-6-37"></a>    <span class="p">&lt;</span><span class="nt">li</span> <span class="na">v-for</span><span class="o">=</span><span class="s">"m in resultats"</span> <span class="na">:key</span><span class="o">=</span><span class="s">"m.id"</span><span class="p">&gt;</span>{{ m.prenom }} {{ m.nom }} ({{ m.specialite }})<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-6-38" name="__codelineno-6-38"></a>  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<a id="__codelineno-6-39" name="__codelineno-6-39"></a><span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>line 16: <strong><em>[route.query]</em></strong> contains the parameters of URL (<strong><em>[?q=...]</em></strong>);</li>
+<li>line 18: if URL changes (Previous button), the field follows;</li>
+<li>line 20: the results depend on URL, not on the field;</li>
+<li>line 27: searching changes the URL; the display updates accordingly. You can bookmark the search, reload it, or go back.</li>
+</ul>
+<p><img src="images/100000000000038400000258CE02CCFF.png" width="491" height="328" style="width:13cm;height:8.668cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/100000000000038400000258CE02CCFF.png" /></p>
+<h2 id="42-example-14-navigation-restrictions">4.2. <span style="color: #2e74b5">Example 14: Navigation Restrictions</span></h2>
+<p>Some pages require you to be logged in, while others require a specific role. This example simulates a login without a server:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span>
+<span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span>
+<span class="normal"><a href="#__codelineno-7-17">17</a></span>
+<span class="normal"><a href="#__codelineno-7-18">18</a></span>
+<span class="normal"><a href="#__codelineno-7-19">19</a></span>
+<span class="normal"><a href="#__codelineno-7-20">20</a></span>
+<span class="normal"><a href="#__codelineno-7-21">21</a></span>
+<span class="normal"><a href="#__codelineno-7-22">22</a></span>
+<span class="normal"><a href="#__codelineno-7-23">23</a></span>
+<span class="normal"><a href="#__codelineno-7-24">24</a></span>
+<span class="normal"><a href="#__codelineno-7-25">25</a></span>
+<span class="normal"><a href="#__codelineno-7-26">26</a></span>
+<span class="normal"><a href="#__codelineno-7-27">27</a></span>
+<span class="normal"><a href="#__codelineno-7-28">28</a></span>
+<span class="normal"><a href="#__codelineno-7-29">29</a></span>
+<span class="normal"><a href="#__codelineno-7-30">30</a></span>
+<span class="normal"><a href="#__codelineno-7-31">31</a></span>
+<span class="normal"><a href="#__codelineno-7-32">32</a></span>
+<span class="normal"><a href="#__codelineno-7-33">33</a></span>
+<span class="normal"><a href="#__codelineno-7-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1">// =========================================================================</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="c1">// 14-gardes/src/session.ts - a SIMULÉE session (without a server)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="c1">// -------------------------------------------------------------------------</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="c1">// The logged-in user, in a reference declared at the MODULE level: all</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="c1">// files that import this module share the same one. (Example 15 will</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="c1">// do the same thing, but better, with Pinia; Example 18 uses a real server.)</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="c1">// =========================================================================</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a>
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ref</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'vue'</span><span class="p">;</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a>
+<a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="k">export</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">Role</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'ADMIN'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'DOCTOR'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'USER'</span><span class="p">;</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12"></a>
+<a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">Utilisateur</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="w">  </span><span class="nx">login</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="w">  </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="kt">Role</span><span class="p">;</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="p">}</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17"></a>
+<a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">utilisateur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ref</span><span class="o">&lt;</span><span class="nx">Utilisateur</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="o">&gt;</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19"></a>
+<a id="__codelineno-7-20" name="__codelineno-7-20"></a><span class="c1">// three "hard-coded" accounts (password = login)</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21"></a><span class="kd">const</span><span class="w"> </span><span class="nx">COMPTES</span><span class="o">:</span><span class="w"> </span><span class="kt">Record</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">Role</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">admin</span><span class="o">:</span><span class="w"> </span><span class="s1">'ADMIN'</span><span class="p">,</span><span class="w"> </span><span class="nx">pelissier</span><span class="o">:</span><span class="w"> </span><span class="s1">'DOCTOR'</span><span class="p">,</span><span class="w"> </span><span class="nx">martin</span><span class="o">:</span><span class="w"> </span><span class="s1">'USER'</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22"></a>
+<a id="__codelineno-7-23" name="__codelineno-7-23"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">connecter</span><span class="p">(</span><span class="nx">login</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">password</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-24" name="__codelineno-7-24"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">role</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">COMPTES</span><span class="p">[</span><span class="nx">login</span><span class="p">];</span>
+<a id="__codelineno-7-25" name="__codelineno-7-25"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">role</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">password</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">login</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<a id="__codelineno-7-27" name="__codelineno-7-27"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-7-28" name="__codelineno-7-28"></a><span class="w">  </span><span class="nx">utilisateur</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">login</span><span class="p">,</span><span class="w"> </span><span class="nx">role</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-7-29" name="__codelineno-7-29"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<a id="__codelineno-7-30" name="__codelineno-7-30"></a><span class="p">}</span>
+<a id="__codelineno-7-31" name="__codelineno-7-31"></a>
+<a id="__codelineno-7-32" name="__codelineno-7-32"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">deconnecter</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-33" name="__codelineno-7-33"></a><span class="w">  </span><span class="nx">utilisateur</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<a id="__codelineno-7-34" name="__codelineno-7-34"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Line 18: a <strong><em>[ref]</em></strong> declared at the <strong>module</strong> level: all files that import <strong><em>[session.ts]</em></strong> share the same one.</li>
+</ul>
+<p>The routes and their margins:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span>
+<span class="normal"><a href="#__codelineno-8-17">17</a></span>
+<span class="normal"><a href="#__codelineno-8-18">18</a></span>
+<span class="normal"><a href="#__codelineno-8-19">19</a></span>
+<span class="normal"><a href="#__codelineno-8-20">20</a></span>
+<span class="normal"><a href="#__codelineno-8-21">21</a></span>
+<span class="normal"><a href="#__codelineno-8-22">22</a></span>
+<span class="normal"><a href="#__codelineno-8-23">23</a></span>
+<span class="normal"><a href="#__codelineno-8-24">24</a></span>
+<span class="normal"><a href="#__codelineno-8-25">25</a></span>
+<span class="normal"><a href="#__codelineno-8-26">26</a></span>
+<span class="normal"><a href="#__codelineno-8-27">27</a></span>
+<span class="normal"><a href="#__codelineno-8-28">28</a></span>
+<span class="normal"><a href="#__codelineno-8-29">29</a></span>
+<span class="normal"><a href="#__codelineno-8-30">30</a></span>
+<span class="normal"><a href="#__codelineno-8-31">31</a></span>
+<span class="normal"><a href="#__codelineno-8-32">32</a></span>
+<span class="normal"><a href="#__codelineno-8-33">33</a></span>
+<span class="normal"><a href="#__codelineno-8-34">34</a></span>
+<span class="normal"><a href="#__codelineno-8-35">35</a></span>
+<span class="normal"><a href="#__codelineno-8-36">36</a></span>
+<span class="normal"><a href="#__codelineno-8-37">37</a></span>
+<span class="normal"><a href="#__codelineno-8-38">38</a></span>
+<span class="normal"><a href="#__codelineno-8-39">39</a></span>
+<span class="normal"><a href="#__codelineno-8-40">40</a></span>
+<span class="normal"><a href="#__codelineno-8-41">41</a></span>
+<span class="normal"><a href="#__codelineno-8-42">42</a></span>
+<span class="normal"><a href="#__codelineno-8-43">43</a></span>
+<span class="normal"><a href="#__codelineno-8-44">44</a></span>
+<span class="normal"><a href="#__codelineno-8-45">45</a></span>
+<span class="normal"><a href="#__codelineno-8-46">46</a></span>
+<span class="normal"><a href="#__codelineno-8-47">47</a></span>
+<span class="normal"><a href="#__codelineno-8-48">48</a></span>
+<span class="normal"><a href="#__codelineno-8-49">49</a></span>
+<span class="normal"><a href="#__codelineno-8-50">50</a></span>
+<span class="normal"><a href="#__codelineno-8-51">51</a></span>
+<span class="normal"><a href="#__codelineno-8-52">52</a></span>
+<span class="normal"><a href="#__codelineno-8-53">53</a></span>
+<span class="normal"><a href="#__codelineno-8-54">54</a></span>
+<span class="normal"><a href="#__codelineno-8-55">55</a></span>
+<span class="normal"><a href="#__codelineno-8-56">56</a></span>
+<span class="normal"><a href="#__codelineno-8-57">57</a></span>
+<span class="normal"><a href="#__codelineno-8-58">58</a></span>
+<span class="normal"><a href="#__codelineno-8-59">59</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1">// =========================================================================</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="c1">// 14-gardes/src/router.ts - routes PROTÉGÉES</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="c1">// -------------------------------------------------------------------------</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="c1">// meta: free information attached to a route. Here:</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="c1">//    - meta.connexion: the page requires you to be logged in;</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="c1">//    - meta.role    s : authorized roles (none = all).</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="c1">//</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="c1">// router.beforeEach(...): a GARDE DE NAVIGATION, executed before CHAQUE</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="c1">// page change. It returns:</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="c1">//    - tru               e : navigation continues;</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="c1">//    - a different addr  ess : redirection;</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="c1">// This is the client-side equivalent of the checks NestJS (JwtAuthGuard,</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="c1">// RolesGuard) — with one difference: FONDAMENTALE. A client guard is</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="c1">// merely a convenience. The client code is in the hands of the user, who</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="c1">// can change it at will. True data protection remains that</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="c1">// provided by the SERVEUR (see the chapter on the black box).</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="c1">// =========================================================================</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18"></a>
+<a id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createRouter</span><span class="p">,</span><span class="w"> </span><span class="nx">createWebHashHistory</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'vue-router'</span><span class="p">;</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">utilisateur</span><span class="p">,</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">Role</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./session'</span><span class="p">;</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="k">import</span><span class="w"> </span><span class="nx">Accueil</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./views/Accueil.vue'</span><span class="p">;</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22"></a><span class="k">import</span><span class="w"> </span><span class="nx">Connexion</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./views/Connexion.vue'</span><span class="p">;</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="k">import</span><span class="w"> </span><span class="nx">Agenda</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./views/Agenda.vue'</span><span class="p">;</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24"></a>
+<a id="__codelineno-8-25" name="__codelineno-8-25"></a><span class="c1">// we declare the meta properties we use to TypeScript</span>
+<a id="__codelineno-8-26" name="__codelineno-8-26"></a><span class="kr">declare</span><span class="w"> </span><span class="nx">module</span><span class="w"> </span><span class="s1">'vue-router'</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27"></a><span class="w">  </span><span class="kd">interface</span><span class="w"> </span><span class="nx">RouteMeta</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-28" name="__codelineno-8-28"></a><span class="w">    </span><span class="nx">connexion?</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<a id="__codelineno-8-29" name="__codelineno-8-29"></a><span class="w">    </span><span class="nx">roles?</span><span class="o">:</span><span class="w"> </span><span class="kt">Role</span><span class="p">[];</span>
+<a id="__codelineno-8-30" name="__codelineno-8-30"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-8-31" name="__codelineno-8-31"></a><span class="p">}</span>
+<a id="__codelineno-8-32" name="__codelineno-8-32"></a>
+<a id="__codelineno-8-33" name="__codelineno-8-33"></a><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createRouter</span><span class="p">({</span>
+<a id="__codelineno-8-34" name="__codelineno-8-34"></a><span class="w">  </span><span class="nx">history</span><span class="o">:</span><span class="w"> </span><span class="kt">createWebHashHistory</span><span class="p">(),</span>
+<a id="__codelineno-8-35" name="__codelineno-8-35"></a><span class="w">  </span><span class="nx">routes</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-8-36" name="__codelineno-8-36"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">'/'</span><span class="p">,</span><span class="w"> </span><span class="nx">component</span><span class="o">:</span><span class="w"> </span><span class="kt">Accueil</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-8-37" name="__codelineno-8-37"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">'/connexion'</span><span class="p">,</span><span class="w"> </span><span class="nx">component</span><span class="o">:</span><span class="w"> </span><span class="kt">Connexion</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-8-38" name="__codelineno-8-38"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">'/agenda'</span><span class="p">,</span><span class="w"> </span><span class="nx">component</span><span class="o">:</span><span class="w"> </span><span class="kt">Agenda</span><span class="p">,</span><span class="w"> </span><span class="nx">meta</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">connexion</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-8-39" name="__codelineno-8-39"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-8-40" name="__codelineno-8-40"></a><span class="w">      </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">'/administration'</span><span class="p">,</span>
+<a id="__codelineno-8-41" name="__codelineno-8-41"></a><span class="w">       </span><span class="c1">// loading DIFFÉRÉ: the code for this component is only downloaded</span>
+<a id="__codelineno-8-42" name="__codelineno-8-42"></a><span class="w">       </span><span class="c1">// on the first visit to the page (Vite actually creates a separate file)</span>
+<a id="__codelineno-8-43" name="__codelineno-8-43"></a><span class="w">      </span><span class="nx">component</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">import</span><span class="p">(</span><span class="s1">'./views/Administration.vue'</span><span class="p">),</span>
+<a id="__codelineno-8-44" name="__codelineno-8-44"></a><span class="w">      </span><span class="nx">meta</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">connexion</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span><span class="w"> </span><span class="nx">roles</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">'ADMIN'</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-8-45" name="__codelineno-8-45"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-8-46" name="__codelineno-8-46"></a><span class="w">  </span><span class="p">],</span>
+<a id="__codelineno-8-47" name="__codelineno-8-47"></a><span class="p">});</span>
+<a id="__codelineno-8-48" name="__codelineno-8-48"></a>
+<a id="__codelineno-8-49" name="__codelineno-8-49"></a><span class="nx">router</span><span class="p">.</span><span class="nx">beforeEach</span><span class="p">((</span><span class="nx">vers</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-50" name="__codelineno-8-50"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">vers</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">connexion</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">utilisateur</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-51" name="__codelineno-8-51"></a><span class="w">     </span><span class="c1">// not logged in: on the login page, remembering where you wanted to go</span>
+<a id="__codelineno-8-52" name="__codelineno-8-52"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">'/connexion'</span><span class="p">,</span><span class="w"> </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">redirect</span><span class="o">:</span><span class="w"> </span><span class="kt">vers.fullPath</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-8-53" name="__codelineno-8-53"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-8-54" name="__codelineno-8-54"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">vers</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">roles</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">utilisateur</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="nx">vers</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">roles</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">utilisateur</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">role</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-55" name="__codelineno-8-55"></a><span class="w">     </span><span class="c1">// logged in, but not with the correct role: redirect to the home page, with a reason</span>
+<a id="__codelineno-8-56" name="__codelineno-8-56"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">'/'</span><span class="p">,</span><span class="w"> </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">refus</span><span class="o">:</span><span class="w"> </span><span class="kt">vers.fullPath</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-8-57" name="__codelineno-8-57"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-8-58" name="__codelineno-8-58"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<a id="__codelineno-8-59" name="__codelineno-8-59"></a><span class="p">});</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Lines 26–31: We declare in <em>[TypeScript]</em> the properties that we will store in the <strong><em>[meta]</em></strong> field of the routes. <strong><em>[meta]</em></strong> accepts arbitrary data; declaring these properties allows them to be used without type casting;</li>
+<li>line 38: the page requires the user to be logged in;</li>
+<li>line 43: <strong>deferred</strong> loading: the code for this component is downloaded only on the first visit to the page. <em>[Vite]</em> stores it in a separate file. This way, an application loads only what it needs at startup;</li>
+<li>Lines 49–59: a <strong>navigation guard</strong>, executed before CHAQUE a page change. It returns <strong><em>[true]</em></strong> to allow access, or another address to redirect to:<ul>
+<li>not logged in: redirects to <strong><em>[/connexion]</em></strong>, retaining the requested page in the <strong><em>[redirect]</em></strong> parameter;</li>
+<li>logged in without the correct role: returns to the home page, with the reason for denial.</li>
+</ul>
+</li>
+</ul>
+<p>The login page redirects the user to where they wanted to go:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span>
+<span class="normal"><a href="#__codelineno-9-12">12</a></span>
+<span class="normal"><a href="#__codelineno-9-13">13</a></span>
+<span class="normal"><a href="#__codelineno-9-14">14</a></span>
+<span class="normal"><a href="#__codelineno-9-15">15</a></span>
+<span class="normal"><a href="#__codelineno-9-16">16</a></span>
+<span class="normal"><a href="#__codelineno-9-17">17</a></span>
+<span class="normal"><a href="#__codelineno-9-18">18</a></span>
+<span class="normal"><a href="#__codelineno-9-19">19</a></span>
+<span class="normal"><a href="#__codelineno-9-20">20</a></span>
+<span class="normal"><a href="#__codelineno-9-21">21</a></span>
+<span class="normal"><a href="#__codelineno-9-22">22</a></span>
+<span class="normal"><a href="#__codelineno-9-23">23</a></span>
+<span class="normal"><a href="#__codelineno-9-24">24</a></span>
+<span class="normal"><a href="#__codelineno-9-25">25</a></span>
+<span class="normal"><a href="#__codelineno-9-26">26</a></span>
+<span class="normal"><a href="#__codelineno-9-27">27</a></span>
+<span class="normal"><a href="#__codelineno-9-28">28</a></span>
+<span class="normal"><a href="#__codelineno-9-29">29</a></span>
+<span class="normal"><a href="#__codelineno-9-30">30</a></span>
+<span class="normal"><a href="#__codelineno-9-31">31</a></span>
+<span class="normal"><a href="#__codelineno-9-32">32</a></span>
+<span class="normal"><a href="#__codelineno-9-33">33</a></span>
+<span class="normal"><a href="#__codelineno-9-34">34</a></span>
+<span class="normal"><a href="#__codelineno-9-35">35</a></span>
+<span class="normal"><a href="#__codelineno-9-36">36</a></span>
+<span class="normal"><a href="#__codelineno-9-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="cm">&lt;!--</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="cm">  14-gardes/src/views/Connexion.vue</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="cm">  Après la connexion, on renvoie l'utilisateur à la page qu'il voulait</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="cm">  ouvrir (paramètre ?redirect=... déposé par le garde), ou à l'accueil.</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="cm">--&gt;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="p">&lt;</span><span class="nt">script</span> <span class="na">setup</span> <span class="na">lang</span><span class="o">=</span><span class="s">"ts"</span><span class="p">&gt;</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ref</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'vue'</span><span class="p">;</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useRoute</span><span class="p">,</span><span class="w"> </span><span class="nx">useRouter</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'vue-router'</span><span class="p">;</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">connecter</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'../session'</span><span class="p">;</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a>
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="kd">const</span><span class="w"> </span><span class="nx">route</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useRoute</span><span class="p">();</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useRouter</span><span class="p">();</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="kd">const</span><span class="w"> </span><span class="nx">login</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ref</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="kd">const</span><span class="w"> </span><span class="nx">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ref</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="kd">const</span><span class="w"> </span><span class="nx">erreur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ref</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16"></a>
+<a id="__codelineno-9-17" name="__codelineno-9-17"></a><span class="kd">function</span><span class="w"> </span><span class="nx">valider</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18"></a><span class="w">  </span><span class="nx">erreur</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="nx">connecter</span><span class="p">(</span><span class="nx">login</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">trim</span><span class="p">(),</span><span class="w"> </span><span class="nx">password</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">erreur</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">redirect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">route</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">redirect</span><span class="p">;</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21"></a><span class="w">     </span><span class="c1">// only a path like INTERNE is accepted: it starts with /, but not with //</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22"></a><span class="w">     </span><span class="c1">// (//site.com/... refers to a AUTRE site) — no redirection to another site</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">interne</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">typeof</span><span class="w"> </span><span class="nx">redirect</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'string'</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">redirect</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="nx">redirect</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">'//'</span><span class="p">);</span>
+<a id="__codelineno-9-24" name="__codelineno-9-24"></a><span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">interne</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">redirect</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">'/'</span><span class="p">);</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26"></a><span class="p">}</span>
+<a id="__codelineno-9-27" name="__codelineno-9-27"></a><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<a id="__codelineno-9-28" name="__codelineno-9-28"></a>
+<a id="__codelineno-9-29" name="__codelineno-9-29"></a><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+<a id="__codelineno-9-30" name="__codelineno-9-30"></a>  <span class="p">&lt;</span><span class="nt">p</span> <span class="na">v-if</span><span class="o">=</span><span class="s">"route.query.redirect"</span> <span class="na">class</span><span class="o">=</span><span class="s">"alert alert-warning"</span><span class="p">&gt;</span>Connectez-vous pour ouvrir {{ route.query.redirect }}.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-9-31" name="__codelineno-9-31"></a>  <span class="p">&lt;</span><span class="nt">form</span> <span class="na">class</span><span class="o">=</span><span class="s">"d-flex flex-wrap gap-2"</span> <span class="err">@</span><span class="na">submit</span><span class="err">.</span><span class="na">prevent</span><span class="o">=</span><span class="s">"valider"</span><span class="p">&gt;</span>
+<a id="__codelineno-9-32" name="__codelineno-9-32"></a>    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">v-model</span><span class="o">=</span><span class="s">"login"</span> <span class="na">class</span><span class="o">=</span><span class="s">"form-control w-auto"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"login"</span> <span class="na">autocomplete</span><span class="o">=</span><span class="s">"username"</span><span class="p">&gt;</span>
+<a id="__codelineno-9-33" name="__codelineno-9-33"></a>    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">v-model</span><span class="o">=</span><span class="s">"password"</span> <span class="na">type</span><span class="o">=</span><span class="s">"password"</span> <span class="na">class</span><span class="o">=</span><span class="s">"form-control w-auto"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"mot de passe"</span> <span class="na">autocomplete</span><span class="o">=</span><span class="s">"current-password"</span><span class="p">&gt;</span>
+<a id="__codelineno-9-34" name="__codelineno-9-34"></a>    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">"btn btn-primary"</span><span class="p">&gt;</span>Se connecter<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<a id="__codelineno-9-35" name="__codelineno-9-35"></a>  <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<a id="__codelineno-9-36" name="__codelineno-9-36"></a>  <span class="p">&lt;</span><span class="nt">p</span> <span class="na">v-if</span><span class="o">=</span><span class="s">"erreur"</span> <span class="na">class</span><span class="o">=</span><span class="s">"text-danger mt-2 mb-0"</span><span class="p">&gt;</span>Login ou mot de passe incorrect.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-9-37" name="__codelineno-9-37"></a><span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Line 23: Only a path like INTERNE is accepted: it starts with <strong><em>[/]</em></strong>, but not with <strong><em>[//]</em></strong> (<strong><em>[//site.com/...]</em></strong> refers to a AUTRE site). Redirecting to a full URL received in the URL would allow a malicious link to send the user, immediately after logging in, to another site imitating ours (a vulnerability known as <em>[open redirect]</em>).</li>
+</ul>
+<p>The other files are very short:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span>
+<span class="normal"><a href="#__codelineno-10-11">11</a></span>
+<span class="normal"><a href="#__codelineno-10-12">12</a></span>
+<span class="normal"><a href="#__codelineno-10-13">13</a></span>
+<span class="normal"><a href="#__codelineno-10-14">14</a></span>
+<span class="normal"><a href="#__codelineno-10-15">15</a></span>
+<span class="normal"><a href="#__codelineno-10-16">16</a></span>
+<span class="normal"><a href="#__codelineno-10-17">17</a></span>
+<span class="normal"><a href="#__codelineno-10-18">18</a></span>
+<span class="normal"><a href="#__codelineno-10-19">19</a></span>
+<span class="normal"><a href="#__codelineno-10-20">20</a></span>
+<span class="normal"><a href="#__codelineno-10-21">21</a></span>
+<span class="normal"><a href="#__codelineno-10-22">22</a></span>
+<span class="normal"><a href="#__codelineno-10-23">23</a></span>
+<span class="normal"><a href="#__codelineno-10-24">24</a></span>
+<span class="normal"><a href="#__codelineno-10-25">25</a></span>
+<span class="normal"><a href="#__codelineno-10-26">26</a></span>
+<span class="normal"><a href="#__codelineno-10-27">27</a></span>
+<span class="normal"><a href="#__codelineno-10-28">28</a></span>
+<span class="normal"><a href="#__codelineno-10-29">29</a></span>
+<span class="normal"><a href="#__codelineno-10-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span> <span class="n">lang</span><span class="o">=</span><span class="s2">"ts"</span><span class="o">&gt;</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="kn">import</span><span class="w"> </span><span class="p">{</span> <span class="n">RouterLink</span><span class="p">,</span> <span class="n">RouterView</span><span class="p">,</span> <span class="n">useRouter</span> <span class="p">}</span> <span class="kn">from</span><span class="w"> </span><span class="s1">'vue-router'</span><span class="p">;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="kn">import</span><span class="w"> </span><span class="p">{</span> <span class="n">deconnecter</span><span class="p">,</span> <span class="n">utilisateur</span> <span class="p">}</span> <span class="kn">from</span><span class="w"> </span><span class="s1">'./session'</span><span class="p">;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="n">const</span> <span class="n">router</span> <span class="o">=</span> <span class="n">useRouter</span><span class="p">();</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="n">function</span> <span class="n">seDeconnecter</span><span class="p">():</span> <span class="n">void</span> <span class="p">{</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a>  <span class="n">deconnecter</span><span class="p">();</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a>  <span class="n">router</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="s1">'/'</span><span class="p">);</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="p">}</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12"></a>
+<a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14"></a>  <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">"container py-4"</span> <span class="n">style</span><span class="o">=</span><span class="s2">"max-width: 720px"</span><span class="o">&gt;</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15"></a>    <span class="o">&lt;</span><span class="n">h1</span> <span class="n">class</span><span class="o">=</span><span class="s2">"h3 mb-3"</span><span class="o">&gt;</span><span class="n">Exemple</span> <span class="mi">14</span> <span class="o">-</span> <span class="n">les</span> <span class="n">gardes</span> <span class="n">de</span> <span class="n">navigation</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16"></a>    <span class="o">&lt;</span><span class="n">nav</span> <span class="n">class</span><span class="o">=</span><span class="s2">"d-flex gap-3 align-items-center mb-3"</span><span class="o">&gt;</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17"></a>      <span class="o">&lt;</span><span class="n">RouterLink</span> <span class="n">to</span><span class="o">=</span><span class="s2">"/"</span><span class="o">&gt;</span><span class="n">Accueil</span><span class="o">&lt;/</span><span class="n">RouterLink</span><span class="o">&gt;</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18"></a>      <span class="o">&lt;</span><span class="n">RouterLink</span> <span class="n">to</span><span class="o">=</span><span class="s2">"/agenda"</span><span class="o">&gt;</span><span class="n">Agenda</span> <span class="p">(</span><span class="n">connecté</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">RouterLink</span><span class="o">&gt;</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19"></a>      <span class="o">&lt;</span><span class="n">RouterLink</span> <span class="n">to</span><span class="o">=</span><span class="s2">"/administration"</span><span class="o">&gt;</span><span class="n">Administration</span> <span class="p">(</span><span class="n">ADMIN</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">RouterLink</span><span class="o">&gt;</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20"></a>      <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">"ms-auto"</span><span class="o">&gt;</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21"></a>        <span class="o">&lt;</span><span class="n">template</span> <span class="n">v</span><span class="o">-</span><span class="k">if</span><span class="o">=</span><span class="s2">"utilisateur"</span><span class="o">&gt;</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22"></a>          <span class="p">{{</span> <span class="n">utilisateur</span><span class="o">.</span><span class="n">login</span> <span class="p">}}</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">"badge text-bg-primary"</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">utilisateur</span><span class="o">.</span><span class="n">role</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23"></a>          <span class="o">&lt;</span><span class="n">button</span> <span class="n">class</span><span class="o">=</span><span class="s2">"btn btn-sm btn-link"</span> <span class="nd">@click</span><span class="o">=</span><span class="s2">"seDeconnecter"</span><span class="o">&gt;</span><span class="n">déconnexion</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24"></a>        <span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+<a id="__codelineno-10-25" name="__codelineno-10-25"></a>        <span class="o">&lt;</span><span class="n">RouterLink</span> <span class="n">v</span><span class="o">-</span><span class="k">else</span> <span class="n">to</span><span class="o">=</span><span class="s2">"/connexion"</span><span class="o">&gt;</span><span class="n">connexion</span><span class="o">&lt;/</span><span class="n">RouterLink</span><span class="o">&gt;</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26"></a>      <span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span>
+<a id="__codelineno-10-27" name="__codelineno-10-27"></a>    <span class="o">&lt;/</span><span class="n">nav</span><span class="o">&gt;</span>
+<a id="__codelineno-10-28" name="__codelineno-10-28"></a>    <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">"card p-3"</span><span class="o">&gt;&lt;</span><span class="n">RouterView</span> <span class="o">/&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<a id="__codelineno-10-29" name="__codelineno-10-29"></a>  <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<a id="__codelineno-10-30" name="__codelineno-10-30"></a><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-11-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span> <span class="n">lang</span><span class="o">=</span><span class="s2">"ts"</span><span class="o">&gt;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="kn">import</span><span class="w"> </span><span class="p">{</span> <span class="n">useRoute</span> <span class="p">}</span> <span class="kn">from</span><span class="w"> </span><span class="s1">'vue-router'</span><span class="p">;</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="n">const</span> <span class="n">route</span> <span class="o">=</span> <span class="n">useRoute</span><span class="p">();</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a>   <span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="err">?</span><span class="n">refus</span><span class="o">=...</span><span class="p">:</span> <span class="n">submitted</span> <span class="n">by</span> <span class="n">the</span> <span class="n">guard</span> <span class="n">when</span> <span class="n">the</span> <span class="n">role</span> <span class="ow">is</span> <span class="n">inappropriate</span> <span class="o">--&gt;</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a>  <span class="o">&lt;</span><span class="n">p</span> <span class="n">v</span><span class="o">-</span><span class="k">if</span><span class="o">=</span><span class="s2">"route.query.refus"</span> <span class="n">class</span><span class="o">=</span><span class="s2">"alert alert-danger"</span><span class="o">&gt;</span><span class="n">Votre</span> <span class="n">rôle</span> <span class="n">ne</span> <span class="n">permet</span> <span class="n">pas</span> <span class="n">d</span><span class="s1">'ouvrir {{ route.query.refus }}.&lt;/p&gt;</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a>  <span class="o">&lt;</span><span class="n">p</span> <span class="n">class</span><span class="o">=</span><span class="s2">"mb-0"</span><span class="o">&gt;</span><span class="n">Page</span> <span class="n">publique</span><span class="o">.</span> <span class="n">Essayez</span> <span class="n">les</span> <span class="n">deux</span> <span class="n">autres</span> <span class="n">liens</span><span class="p">,</span> <span class="n">connecté</span> <span class="n">ou</span> <span class="n">non</span> <span class="p">(</span><span class="n">admin</span><span class="p">,</span> <span class="n">pelissier</span><span class="p">,</span> <span class="n">martin</span> <span class="o">-</span> <span class="n">mot</span> <span class="n">de</span> <span class="n">passe</span> <span class="o">=</span> <span class="n">login</span><span class="p">)</span><span class="o">.&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p>Clicking on “Administration (ADMIN)” while not logged in takes you to the login page:</p>
+<p><img src="images/10000000000003840000025877A9AF1C.png" width="491" height="328" style="width:13cm;height:8.668cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000003840000025877A9AF1C.png" /></p>
+<p>When logged in with the account <strong><em>[martin]</em></strong> (role <strong><em>[USER]</em></strong>), the guard denies access to the administration page:</p>
+<p><img src="images/100000000000038400000258FD7DD0AA.png" width="491" height="328" style="width:13cm;height:8.668cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/100000000000038400000258FD7DD0AA.png" /></p>
+<p>A note on FONDAMENTAL: a navigation guard is merely a <strong>convenience</strong> (to avoid displaying an unnecessary page). The client-side code is in the user’s hands; they can read and modify it in their browser. True data protection comes from the <strong>server</strong>, which verifies the user’s identity and role with every request. We’ll see this with the <em>[RdvMedecins]</em> server.</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner">
+
+      <div>
+        <a href="https://stahe.github.io" target="_blank">
+          https://stahe.github.io
+        </a>
+        <br>
+        This tutorial, written by Anthropic’s AI <strong>Claude</strong> at the request of <strong>Serge Tahé</strong>, is made available to the public under the terms of the
+        <em>Creative Commons Attribution – No Commercial Use –
+        ShareAlike 3.0 Unported</em>.
+
+      </div>
+
+    </div>
+  </div>
+
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.indexes", "navigation.expand", "toc.integrate", "navigation.top"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="javascripts/focus.js"></script>
+      
+    
+  </body>
+</html>
