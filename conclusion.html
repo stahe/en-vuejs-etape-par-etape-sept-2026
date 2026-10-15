@@ -679,14 +679,14 @@
 <h1 id="12-conclusion">12. <span style="color: #2e74b5">Conclusion</span></h1>
 <p>We have written the <em>[Vue.js]</em> client for the <em>[RdvMedecins]</em> application. For the user, it provides the same pages as the HTML application from the <em>[NestJS]</em> course; for the developer, everything has changed:</p>
 <ul>
-<li>the server no longer generates pages. It exposes a API JSON, whose contract (routes, body, codes, and error keys) was sufficient to write the client without ever reading its code;</li>
+<li>the server no longer generates pages. It exposes a JSON API, whose contract (routes, body, codes, and error keys) was sufficient to write the client without ever reading its code;</li>
 <li>the pages, language, formatting, messages, and navigation have moved to the browser;</li>
 <li>Security, however, has not changed: it is still the server that authenticates (cookie <strong><em>[HttpOnly]</em></strong>), verifies roles and management rules, and decides what a patient is authorized to see. The client simply displays what the server sends it.</li>
 </ul>
-<p>The same server JSON could serve other clients: a mobile app, a client named <em>[Angular]</em> or <em>[React]</em>, or a script. That is the whole point of separating the client from the server with a API.</p>
-<p>The <em>[Vue.js]</em> concepts covered in this course (components, responsiveness, router, stores, composables) are common to all <em>[Vue.js]</em> applications. To learn more:</p>
+<p>The same JSON server could serve other clients: a mobile app, an [Angular] or [React] client, or a script. That is the whole point of separating the client from the server with an API.</p>
+<p>The <em>[Vue.js]</em> concepts covered in this course (components, reactivity, router, stores, composables) are common to all <em>[Vue.js]</em> applications. To learn more:</p>
 <ul>
-<li>the official documentation, in French:<a href="https://fr.vuejs.org/"><u><span style="color: #0563c1"> https://fr.vuejs.org</span></u></a>;</li>
+<li>the official documentation: https://vuejs.org<a href="https://fr.vuejs.org/"></a>;</li>
 <li>tests: <em>[Vitest]</em> for unit tests of components and composables, <em>[Playwright]</em> for end-to-end tests (this is the tool used to create the screenshots in this document);</li>
 <li><em>[Nuxt]</em>, the framework built on top of <em>[Vue.js]</em>, which can also generate pages on the server side: this would then partially replicate the architecture of the <em>[NestJS]</em> course.</li>
 </ul>

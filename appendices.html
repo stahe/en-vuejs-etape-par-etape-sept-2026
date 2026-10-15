@@ -775,17 +775,17 @@
 <p>To run multiple versions of <em>[Node.js]</em> on the same machine, you can use <em>[nvm-windows]</em> (under <em>[Windows]</em>) or <em>[nvm]</em> (under <em>[Linux]</em> and <em>[macOS]</em>).</p>
 <p>The examples and case study do not require the installation of any global tools: <em>[Vite]</em>, <em>[TypeScript]</em>, <strong><em>[vue-tsc]</em></strong> (and, for the server, the <strong><em>[nest]</em></strong> tool) are part of each project’s dependencies, installed by <strong><em>[npm install]</em></strong>.</p>
 <h2 id="132-installing-visual-studio-code">13.2. <span style="color: #2e74b5">Installing Visual Studio Code</span></h2>
-<p><em>[Visual Studio Code]</em> is downloaded via code.visualstudio.com. For the <strong><em>[.vue]</em></strong> files, install the <strong>Vue (Official)</strong> extension (editor Vue.volar) from the Extensions panel (Ctrl+Shift+X): syntax highlighting, code completion, type checking (<em>[TypeScript])</em> in templates, and navigation to the definition of a component or prop.</p>
-<p>Open a project via the File / Open Folder menu (the <strong><em>[exemples-vuejs]</em></strong> folder, for example), and open a console within it via the Terminal / New Terminal menu.</p>
+<p><em>[Visual Studio Code]</em> is downloaded via code.visualstudio.com. For the <strong><em>[.vue]</em></strong> files, install the <strong>Vue (Official)</strong> extension (publisher Vue.volar) from the Extensions panel (Ctrl+Shift+X): syntax highlighting, code completion, type checking (<em>[TypeScript])</em> in templates, and navigation to the definition of a component or prop.</p>
+<p>Open a project via the File / Open Folder menu (the <strong><em>[examples-vuejs]</em></strong> folder, for example), and open a console within it via the Terminal / New Terminal menu.</p>
 <h2 id="133-the-vuejs-devtools-extension">13.3. <span style="color: #2e74b5">The Vue.js devtools extension</span></h2>
-<p>The <strong>Vue.js devtools</strong> extension can be installed from the extension store for <em>[Chrome]</em>, <em>[Edge],</em> or <em>[Firefox]</em>. It adds a “View” tab to the browser’s developer tools (F12), which displays:</p>
+<p>The <strong>Vue.js devtools</strong> extension can be installed from the extension store for <em>[Chrome]</em>, <em>[Edge],</em> or <em>[Firefox]</em>. It adds a “Vue” tab to the browser’s developer tools (F12), which displays:</p>
 <ul>
 <li>the page component tree, and, for each component, its props and state (<strong><em>[ref]</em></strong>, <strong><em>[reactive]</em></strong>, <strong><em>[computed]</em></strong>);</li>
-<li>the <em>[Pinia]</em> panels and their contents;</li>
+<li>the [Pinia] stores and their contents;</li>
 <li>the router&#x27;s routes and the current route;</li>
 <li>A timeline of events emitted by the components.</li>
 </ul>
-<p>You can modify a piece of data there and watch the page update: an excellent way to understand responsiveness.</p>
+<p>You can modify a piece of data there and watch the page update: an excellent way to understand reactivity.</p>
 <h2 id="134-installing-mysql-with-laragon">13.4. <span style="color: #2e74b5">Installing MySQL with Laragon</span></h2>
 <p>The JSON server requires <em>[MySQL]</em> (or <em>[MariaDB]</em>). <em>[Laragon]</em> (laragon.org) installs one under <em>[Windows]</em>, ready to use, along with the <em>[HeidiSQL]</em> administration tool. After installation:</p>
 <ul>
@@ -798,7 +798,7 @@
 <p><em>[curl]</em> is included with <em>[Windows]</em> versions 10 and 11, <em>[macOS],</em> and most distributions of <em>[Linux]</em>. Check its version:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl --version
 </code></pre></div>
-<p>The option <strong><em>[--json]</em></strong>, used in this document, has been available since version 7.82 (2022). If you are using an older version, replace <strong><em>[--json @fichier]</em></strong> with <strong><em>[-H &quot;Content-Type: application/json&quot; -d @fichier]</em></strong>, or install a recent version starting with curl.se.</p>
+<p>The option <strong><em>[--json]</em></strong>, used in this document, has been available since version 7.82 (2022). If you are using an older version, replace <strong><em>[--json @file] with [-H &quot;Content-Type: application/json&quot; -d @file]</em></strong>, or install a recent version from curl.se.</p>
 <p>In <em>[PowerShell]</em>, you must enter <strong><em>[curl.exe]</em></strong>, not <strong><em>[curl]</em></strong>: In <em>[PowerShell]</em>, <strong><em>[curl]</em></strong> is an alias for another command (<strong><em>[Invoke-WebRequest]</em></strong>), which does not include the options from <em>[curl]</em>. The command prompt (<em>[cmd]</em>) does not have this issue.</p>
 
 

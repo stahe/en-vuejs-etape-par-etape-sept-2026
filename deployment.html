@@ -677,7 +677,7 @@
 
 
 <h1 id="11-deployment">11. <span style="color: #2e74b5">Deployment</span></h1>
-<p>In development, two servers work together: <em>[Vite]</em> (the client) and the server JSON (the API). In production, there is only one:</p>
+<p>In development, two servers work together: <em>[Vite]</em> (the client) and the JSON server (the API). In production, there is only one:</p>
 <p><img src="images/100000000000087C0000037A4AC1EBF9.png" width="605" height="248" style="width:16cm;height:6.556cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/100000000000087C0000037A4AC1EBF9.png" /></p>
 <p><strong>1. Build the client.</strong> In the <strong><em>[rdvmedecins-vuejs]</em></strong> folder:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>npm run build
@@ -702,25 +702,25 @@
 <a id="__codelineno-1-3" name="__codelineno-1-3"></a>
 <a id="__codelineno-1-4" name="__codelineno-1-4"></a>vite v7.3.6 building client environment for production...
 <a id="__codelineno-1-5" name="__codelineno-1-5"></a>✓ 96 modules transformed.
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a>dist/index.html                                    0.90 kB │ gzip:  0.53 kB
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a>dist/assets/index-C2BH5lpe.css                   231.34 kB │ gzip: 30.87 kB
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a>dist/assets/ErreurView-WmT0JIzD.js                 0.55 kB │ gzip:  0.40 kB
-<a id="__codelineno-1-9" name="__codelineno-1-9"></a>dist/assets/PersonnesView-CSo0V33J.js              2.04 kB │ gzip:  0.99 kB
-<a id="__codelineno-1-10" name="__codelineno-1-10"></a>dist/assets/EspacePatientView-UadQ9HRE.js          2.21 kB │ gzip:  1.09 kB
-<a id="__codelineno-1-11" name="__codelineno-1-11"></a>dist/assets/InscriptionView-B3-HHgam.js            2.59 kB │ gzip:  1.22 kB
-<a id="__codelineno-1-12" name="__codelineno-1-12"></a>dist/assets/PersonneFormulaireView-DEIiSHDx.js     2.67 kB │ gzip:  1.34 kB
-<a id="__codelineno-1-13" name="__codelineno-1-13"></a>dist/assets/MonCompteView-BRleWR-E.js              3.92 kB │ gzip:  1.54 kB
-<a id="__codelineno-1-14" name="__codelineno-1-14"></a>dist/assets/index-BkCBbbGt.js                    196.28 kB │ gzip: 70.71 kB
-<a id="__codelineno-1-15" name="__codelineno-1-15"></a>✓ built in 2.15s
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a>dist/index.html                             0.90 kB │ gzip:  0.52 kB
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a>dist/assets/index-VQExeVE4.css            231.34 kB │ gzip: 30.87 kB
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a>dist/assets/ErrorView-B9Z8vrOJ.js           0.55 kB │ gzip:  0.40 kB
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a>dist/assets/PersonsView-B4Jl6pHo.js         1.99 kB │ gzip:  0.98 kB
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a>dist/assets/PatientAreaView-B6uA2FSB.js     2.20 kB │ gzip:  1.08 kB
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a>dist/assets/RegisterView-CLY_I0Z-.js        2.62 kB │ gzip:  1.21 kB
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a>dist/assets/PersonFormView-BLJqMaW-.js      2.67 kB │ gzip:  1.33 kB
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a>dist/assets/MyAccountView-CcpX9Rlc.js       3.89 kB │ gzip:  1.51 kB
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a>dist/assets/index-DX4x1EAt.js             195.94 kB │ gzip: 70.60 kB
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a>✓ built in 2.88s
 </code></pre></div></td></tr></table></div>
-<p>The <strong><em>[dist/]</em></strong> folder contains the entire application: a page named <strong><em>[index.html]</em></strong>, a stylesheet, and optimized <em>[JavaScript]</em> files (the code from <em>[Vue.js]</em>, the router, <em>[Pinia]</em>... and ours). The pages loaded on demand (<strong><em>[() =&gt; import(...)]</em></strong>) each have their own file. The name of each file contains a hash of its contents (<strong><em>[index-BkCBbbGt.js]</em></strong>): a new version will have a different name, and a browser will never be able to cache an outdated version.</p>
+<p>The <strong><em>[dist/]</em></strong> folder contains the entire application: a page named <strong><em>[index.html]</em></strong>, a stylesheet, and optimized <em>[JavaScript]</em> files (the code from <em>[Vue.js]</em>, the router, <em>[Pinia]</em>... and ours). The pages loaded on demand (<strong><em>[() =&gt; import(...)]</em></strong>) each have their own file. The name of each file contains a hash of its contents (<strong><em>[index-DX4x1EAt.js]</em></strong>): a new version will have a different name, and a browser will never be able to cache an outdated version.</p>
 <p>You can verify this version using <strong><em>[npm run preview]</em></strong> (http://localhost:4173).</p>
-<p><strong>2. Upload it to the server.</strong> Copy CONTENU from the <strong><em>[dist/]</em></strong> folder to the <strong><em>[client/]</em></strong> folder at the root of the server JSON (<strong><em>[rdvmedecins-nestjs-json/client/index.html]</em></strong>, <strong><em>[rdvmedecins-nestjs-json/client/assets/...]</em></strong>), then restart the server. It displays:</p>
+<p><strong>2. Upload it to the server.</strong> Copy the CONTENTS of the [dist/] folder to the <strong><em>[client/]</em></strong> folder at the root of the JSON server (<strong><em>[rdvmedecins-nestjs-json/client/index.html]</em></strong>, <strong><em>[rdvmedecins-nestjs-json/client/assets/...]</em></strong>), then restart the server. It displays:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
-<span class="normal"><a href="#__codelineno-2-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>[Nest] LOG [RdvMedecins] client Vue.js servi depuis .../rdvmedecins-nestjs-json/client
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a>[Nest] LOG [RdvMedecins] serveur JSON démarré : http://localhost:8080/api
+<span class="normal"><a href="#__codelineno-2-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>[Nest] LOG [RdvMedecins] Vue.js client served from .../rdvmedecins-nestjs-json/client
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a>[Nest] LOG [RdvMedecins] JSON server started: http://localhost:8080/api
 </code></pre></div></td></tr></table></div>
-<p>The complete application is then available at http://localhost:8080. The server serves the client’s files and returns <strong><em>[index.html]</em></strong> for any other address outside of <strong><em>[/api]</em></strong>: reloading the <strong><em>[/agenda]</em></strong> page works (it is the client’s router that displays it). For the curious reader, it is the file <strong><em>[src/web/client-spa.ts]</em></strong> on the server that performs this task.</p>
+<p>The complete application is then available at http://localhost:8080. The server serves the client’s files and returns <strong><em>[index.html]</em></strong> for any other address outside of <strong><em>[/api]</em></strong>: reloading the <strong><em>[/schedule]</em></strong> page works (it is the client’s router that displays it). For the curious reader, it is the file <strong><em>[src/web/client-spa.ts]</em></strong> on the server that performs this task.</p>
 <p><strong>3. In a live production environment</strong>, don’t forget the server file <strong><em>[.env]</em></strong>:</p>
 <ul>
 <li>a long, random <strong><em>[JWT_SECRET]</em></strong>;</li>
